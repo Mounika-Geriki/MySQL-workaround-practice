@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Python / node etc (if any)
+__pycache__/
+node_modules/
+
+# DB dumps and credentials - edit as needed
+*.sql.gz
+*.env
+*.secret
+secrets/
+*.key
