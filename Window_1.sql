@@ -1,11 +1,11 @@
 ### ADVANCED SQL 
 
-## WINDOW functions
-# GROUP BY - few details are lost - i/p 4 rows -> o/p 2 rows
-# WINDOW- row level calculations - i/p 4 rows -> o/p 4 rows
-#GROUP BY and WINDOW Aggregate functions- COUNT, SUM, AVG, MIN, MAX
-# WINDOW has more functions- Rank functions ( ROW_NUMBER, RANK, DENSE_RANK, CUME_DIST, PERCENT_RANK, NTILE)
-# VALUE(Analytics) functions(LEAD,LAG,FIRST_VALUE,LAST_VALUE)
+-- ## WINDOW functions
+-- # GROUP BY - few details are lost - i/p 4 rows -> o/p 2 rows
+-- # WINDOW- row level calculations - i/p 4 rows -> o/p 4 rows
+-- #GROUP BY and WINDOW Aggregate functions- COUNT, SUM, AVG, MIN, MAX
+-- # WINDOW has more functions- Rank functions ( ROW_NUMBER, RANK, DENSE_RANK, CUME_DIST, PERCENT_RANK, NTILE)
+-- # VALUE(Analytics) functions(LEAD,LAG,FIRST_VALUE,LAST_VALUE)
   
 #Why we need WINDOW functions why GROUPBY is not enough?
 # task- find the total sales across all orders
@@ -49,12 +49,12 @@ FROM orders;
 ### WE have solved the task- we can see  OrderID, OrderDate,ProductID, and TotalSalesByProducts(aggregated by each row)
  
 
-### OVER CLAUSE- TELLS SQL THAT FUNC USED IS A WINDOW FUNCTION
-### PARTITION BY - DIVIDES THE DATASET/RESULTS INTO WINDOWS(PARTITIONS)- SIMILAR TO GROUPBY
-### OVER()- Calculations is done on entire dataset - entire dataset is considerd as single window
-### OVER( PARTITION BY Product) - Calculations is done ***individually*** on each window
+-- ### OVER CLAUSE- TELLS SQL THAT FUNC USED IS A WINDOW FUNCTION
+-- ### PARTITION BY - DIVIDES THE DATASET/RESULTS INTO WINDOWS(PARTITIONS)- SIMILAR TO GROUPBY
+-- ### OVER()- Calculations is done on entire dataset - entire dataset is considerd as single window
+-- ### OVER( PARTITION BY Product) - Calculations is done ***individually*** on each window
 
-## we have 3 fields - Month(Jan, Feb), Product(Bottle, cap, Gloves), Sale(1,20,....)
+-- ## we have 3 fields - Month(Jan, Feb), Product(Bottle, cap, Gloves), Sale(1,20,....)
  SUM(Sales) OVER()    ### entire dataset is a single window)
  
  SUM(Sales) OVER( PARTITION BY Month)  ### consider Jan as 1 window and Feb as 2nd window
@@ -104,13 +104,13 @@ SELECT OrderID, OrderDate,ProductID, OrderStatus, Sales,
 RANK() OVER(ORDER BY Sales DESC) Ranksales
 FROM orders;
 
-##### WINDOW FRAMES - DEFINES SUBSET OF ROWS WITHIN EACH WINDOW THAT IS RELEVANT FOR THE CALCULATIONS
-#### FRAME TYPES, FRAME BOUNDARY(LOWER VALUE),FRAME BOUNDARY(HIGHER VALUE)
-###*****RULES***** 
-###RULE1: Frame clause can ONLY be used together with ORDER BY clause
-###RULE2: lower value must be before the higher value
+-- ##### WINDOW FRAMES - DEFINES SUBSET OF ROWS WITHIN EACH WINDOW THAT IS RELEVANT FOR THE CALCULATIONS
+-- #### FRAME TYPES, FRAME BOUNDARY(LOWER VALUE),FRAME BOUNDARY(HIGHER VALUE)
+-- ###*****RULES***** 
+-- ###RULE1: Frame clause can ONLY be used together with ORDER BY clause
+-- ###RULE2: lower value must be before the higher value
 
-#### refer notes for combinations of frames
+-- #### refer notes for combinations of frames
 SELECT OrderID, OrderDate, OrderStatus, Sales,
 SUM(Sales) OVER(PARTITION BY OrderStatus ORDER BY OrderDate
                  ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING) Totalsales
